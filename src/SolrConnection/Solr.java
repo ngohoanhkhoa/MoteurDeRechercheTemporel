@@ -31,6 +31,7 @@ public class Solr {
 	SolrDocumentList list = response.getResults();
 	
 	TreeSet<Document> result = new TreeSet<Document>(new SortedClass());
+	
 	for (SolrDocument doc : list) {		
 		
 		Double index = Double.parseDouble(doc.get("dct").toString().replaceAll("[^0-9.]", ""));
@@ -39,11 +40,13 @@ public class Solr {
 		String date = doc.get("dct").toString().substring(1, doc.get("dct").toString().length()-1);
 		String title = doc.get("title").toString().substring(1, doc.get("title").toString().length()-1);
 		String url =  doc.get("url").toString().substring(1, doc.get("url").toString().length()-1);
-		
-		Document document = new Document(index, id, title, date, url);
+		Double score = Double.parseDouble(doc.get("score").toString());
+
+		Document document = new Document(index, id, title, date, url, score);
 		result.add(document);
+		
+		
 	}
-	
 	return result;
 	
   }

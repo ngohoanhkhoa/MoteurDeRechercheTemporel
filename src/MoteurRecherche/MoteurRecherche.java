@@ -27,6 +27,14 @@ public class MoteurRecherche {
 	    	cluster.setDocumentList(documentList);
 	    	
 	    	ArrayList<ArrayList<Document>> result = cluster.getDBSCAN();
+	    	
+	    	for(ArrayList<Document> documentGroup: result) {
+	    		System.out.println("Cluster: ");
+	    		for(Document document: documentGroup) {
+	    			System.out.println(document.getTitle());
+	    			System.out.println(document.getScore()*100);
+	    		}
+	    	}
 	    
 	    	exportJSON(result);
 	    	
@@ -50,8 +58,8 @@ public class MoteurRecherche {
 			ArrayList<JSONObject> clusterArray = new ArrayList<JSONObject>();
 			for(Document document: documentGroup) {
 				JSONObject member = new JSONObject();
-				member.put("name", document.getId());
-				member.put("size", document.getSortedIndex());
+				member.put("name", document.getTitle());
+				member.put("size", document.getScore());
 				clusterArray.add(member);
 			}
 			cluster.put("name", "Doc");

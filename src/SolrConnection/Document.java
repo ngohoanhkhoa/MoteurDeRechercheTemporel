@@ -6,13 +6,15 @@ public class Document {
 	private String title;
 	private String date;
 	private String url;
+	private Double score;
 	
-	public Document(Double sortedIndex, String id, String title, String date, String url) {
+	public Document(Double sortedIndex, String id, String title, String date, String url, Double score) {
 		this.sortedIndex = sortedIndex;
 		this.id = id;
 		this.title = title;
 		this.date = date;
 		this.url = url;
+		this.score = score;
 	}
 	
 	public String getId() {
@@ -33,6 +35,10 @@ public class Document {
 
 	public Double getSortedIndex() {
 		return sortedIndex;
+	}
+
+	public Double getScore() {
+		return score;
 	}
 
 }
