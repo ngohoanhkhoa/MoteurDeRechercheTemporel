@@ -23,6 +23,8 @@ public class Solr {
 	
 	SolrQuery query = new SolrQuery();
     query.setQuery(queryString);
+    query.setFields("id","title", "dct", "score", "url");
+    
     query.setStart(0);    
     
 	QueryResponse response = solr.query(query);
