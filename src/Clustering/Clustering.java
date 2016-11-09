@@ -6,15 +6,23 @@ import java.util.ArrayList;
 
 public class Clustering {
 	
-	public Double maximumDistance = 0.0;
+	private Double maximumDistance = 0.0;
 
-	public Integer minimumNeighbours = 3;
+	private Integer minimumNeighbours = 3;
 	
-	public ArrayList<Document> documentList = new ArrayList<Document>();
+	private ArrayList<Document> documentList = new ArrayList<Document>();
     
     
 	public void setDocumentList(ArrayList<Document> documentList) {
 		this.documentList = documentList;
+		
+		Integer sumNumberNeighbour = 0;
+		for(Document document: documentList) {
+			Integer neighbourSize = this.getNeighboursSize(document);
+			sumNumberNeighbour = sumNumberNeighbour + neighbourSize;
+		}
+		this.setMinimumNeighbours((Integer) sumNumberNeighbour/documentList.size());
+		
 	}
 
 	public void setMaximumDistance(Double maximumDistance) {
@@ -22,10 +30,16 @@ public class Clustering {
 	}
 
 	public void setMinimumNeighbours(int minimumNeighbours) {
-		this.minimumNeighbours = minimumNeighbours;
+		if(minimumNeighbours < 3) {
+			this.minimumNeighbours = 3;
+		} else {
+			this.minimumNeighbours = minimumNeighbours;
+		}
 	}
     
     public ArrayList<ArrayList<Document>> getDBSCAN() {
+    	
+    	System.out.println("minimumNeighbours: "+ this.minimumNeighbours);
     	
     	ArrayList<ArrayList<Document>> resultList = new ArrayList<ArrayList<Document>>();
     	ArrayList<String> visitedList = new ArrayList<String>();
@@ -68,7 +82,17 @@ public class Clustering {
     		}
     	}
     	return neighbours;
-    	
+    }
+    
+    private Integer getNeighboursSize(Document documentEstimated) {
+    	Integer neighbourSize = 0;
+    	for(Document document : this.documentList) {
+    		Double distance = Math.abs(document.getSortedIndex() - documentEstimated.getSortedIndex());
+    		if(distance <=  this.maximumDistance) {
+    			neighbourSize++;
+    		}
+    	}
+    	return neighbourSize;
     }
     
 
