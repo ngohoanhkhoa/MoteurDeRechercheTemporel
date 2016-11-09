@@ -14,16 +14,16 @@ import org.json.simple.JSONObject;
 
 public class MoteurRecherche {
 	public static void main(String [ ] args) {
-		
-		/*ArrayList<Document> documentList1 = new ArrayList<Document>();
+		/*
+		ArrayList<Document> documentList1 = new ArrayList<Document>();
 		
 		Document d1 = new Document(1.0, "1", "1", "1", "1", 12.0);
     	Document d2 = new Document(2.0, "2", "2", "2", "2", 12.0);
     	Document d3 = new Document(3.0, "3", "3", "3", "3", 12.0);
-    	Document d4 = new Document(40.0, "4", "4", "4", "4", 12.0);
-    	Document d5 = new Document(41.0, "5", "5", "5", "5", 12.0);
-    	Document d6 = new Document(42.0, "6", "6", "6", "6", 12.0);
-    	Document d7 = new Document(43.0, "7", "7", "7", "7", 12.0);
+    	Document d4 = new Document(4.0, "4", "4", "4", "4", 12.0);
+    	Document d5 = new Document(10.0, "5", "5", "5", "5", 12.0);
+    	Document d6 = new Document(11.0, "6", "6", "6", "6", 12.0);
+    	Document d7 = new Document(12.0, "7", "7", "7", "7", 12.0);
     	
     	documentList1.add(d1);
     	documentList1.add(d2);
@@ -36,8 +36,8 @@ public class MoteurRecherche {
 		
 		Clustering cluster1 = new Clustering();
     	
-    	cluster1.setMaximumDistance(300000000.0);
-    	cluster1.setMinimumNeighbours(documentList1.size()/5);
+    	cluster1.setMaximumDistance(3.0);
+    	cluster1.setMinimumNeighbours(3);
     	
     	cluster1.setDocumentList(documentList1);
 
@@ -53,16 +53,17 @@ public class MoteurRecherche {
     		}
     	}
     
-    	exportJSON(result1);*/
-		
+    	exportJSON(result1);
+		*/
 		try {
 			Solr server = new Solr();
 			TreeSet<Document> reponse = server.getReponse("obama");
 			ArrayList<Document> documentList = new ArrayList<Document>(reponse);
 			Clustering cluster = new Clustering();
+
 	    	
-	    	cluster.setMaximumDistance(300000000.0);
-	    	cluster.setMinimumNeighbours(documentList.size()/5);
+	    	cluster.setMaximumDistance(100000.0);
+	    	cluster.setMinimumNeighbours(documentList.size()/5 < 3 ? 3 : documentList.size()/5);
 	    	
 	    	cluster.setDocumentList(documentList);
 
@@ -73,8 +74,10 @@ public class MoteurRecherche {
 	    	for(ArrayList<Document> documentGroup: result) {
 	    		System.out.println("Cluster: ");
 	    		for(Document document: documentGroup) {
+	    			//System.out.println(document.getId());
 	    			System.out.println(document.getTitle());
-	    			System.out.println(document.getScore()*100);
+	    			//System.out.println(document.getScore()*100);
+	    			//System.out.println(document.getDate());
 	    		}
 	    	}
 	    
@@ -114,7 +117,7 @@ public class MoteurRecherche {
 		allCluster.put("name", "Document");
 		allCluster.put("children", allClusterArray);
 		
-		System.out.println(allCluster);
+		//System.out.println(allCluster);
 		
 	}
 
