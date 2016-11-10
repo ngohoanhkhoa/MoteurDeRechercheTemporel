@@ -38,9 +38,7 @@ public class Clustering {
 	}
     
     public ArrayList<ArrayList<Document>> getDBSCAN() {
-    	
-    	System.out.println("minimumNeighbours: "+ this.minimumNeighbours);
-    	
+
     	ArrayList<ArrayList<Document>> resultList = new ArrayList<ArrayList<Document>>();
     	ArrayList<String> visitedList = new ArrayList<String>();
     	
