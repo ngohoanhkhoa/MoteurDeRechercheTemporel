@@ -14,7 +14,7 @@ import java.util.TreeSet;
 
 public class Solr {
 	
-	public String urlString = "http://localhost:8983/solr/REI";
+	public String urlString = "http://localhost:8983/solr/REITest";
 	
 	
 	public TreeSet<Document> getReponse(String queryString) throws SolrServerException, IOException {
