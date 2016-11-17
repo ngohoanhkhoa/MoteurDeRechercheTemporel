@@ -17,6 +17,7 @@ import org.json.simple.JSONObject;
 
 public class MoteurRecherche {
 	public static void main(String [ ] args) {
+		
 		try {
 			Solr server = new Solr();
 			TreeSet<Document> reponse = server.getReponse("obama");
@@ -26,7 +27,6 @@ public class MoteurRecherche {
 	    	Double periodEvent = Math.abs(documentList.get(0).getSortedIndex() - documentList.get(documentList.size()-1).getSortedIndex()); 
 	    	
 	    	Double maxDistance = periodEvent/4;
-	    	
 	    	
 	    	
 	    	System.out.println("Document Size: "+ documentList.size());
@@ -84,7 +84,7 @@ public class MoteurRecherche {
 				memberDocument.put("size", document.getScore());
 				memberDocument.put("name", document.getTitle());
 				
-				member.put("name", document.getTitle());
+				member.put("name", document.getTitle().substring(0, document.getTitle().length()/5) + "...");
 				member.put("url", document.getUrl());
 				
 				memberDocumentArray.add(memberDocument);
