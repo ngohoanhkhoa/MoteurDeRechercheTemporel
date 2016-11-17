@@ -67,6 +67,7 @@ public class Clustering {
     			
     		}
     	}
+    	
 		return resultList;
     	
     }

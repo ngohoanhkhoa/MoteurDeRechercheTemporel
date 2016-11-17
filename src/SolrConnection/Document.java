@@ -8,6 +8,8 @@ public class Document {
 	private String url;
 	private Double score;
 	
+	public int clusterNumber;
+	
 	public Document(Double sortedIndex, String id, String title, String date, String url, Double score) {
 		this.sortedIndex = sortedIndex;
 		this.id = id;

@@ -17,7 +17,6 @@ import org.json.simple.JSONObject;
 
 public class MoteurRecherche {
 	public static void main(String [ ] args) {
-		
 		try {
 			Solr server = new Solr();
 			TreeSet<Document> reponse = server.getReponse("obama");
@@ -78,8 +77,19 @@ public class MoteurRecherche {
 			ArrayList<JSONObject> clusterArray = new ArrayList<JSONObject>();
 			for(Document document: documentGroup) {
 				JSONObject member = new JSONObject();
+				
+				JSONObject memberDocument = new  JSONObject();
+				ArrayList<JSONObject> memberDocumentArray = new ArrayList<JSONObject>();
+				
+				memberDocument.put("size", document.getScore());
+				memberDocument.put("name", document.getTitle());
+				
 				member.put("name", document.getTitle());
-				member.put("size", document.getScore());
+				member.put("url", document.getUrl());
+				
+				memberDocumentArray.add(memberDocument);
+				member.put("children", memberDocumentArray);
+				
 				clusterArray.add(member);
 			}
 			
