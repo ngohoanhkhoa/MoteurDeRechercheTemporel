@@ -97,15 +97,13 @@ public class MoteurRecherche {
 			String endTime = documentGroup.get(documentGroup.size()-1).getDate();
 			
 			String startTimeClusterName = startTime.substring(6,8) + "/" + startTime.substring(4,6) + "/"
-					+ startTime.substring(0,4) + " " + startTime.substring(9,11) + ":" + 
-					startTime.substring(11,13) + ":" + startTime.substring(13,15);
+					+ startTime.substring(0,4);
 			
 			String endTimeClusterName = endTime.substring(6,8) + "/" + endTime.substring(4,6) + "/"
-					+ endTime.substring(0,4) + " " + endTime.substring(9,11) + ":" + 
-					endTime.substring(11,13) + ":" + endTime.substring(13,15);
+					+ endTime.substring(0,4);
 			
-			cluster.put("name", "From " + startTimeClusterName + " To " 
-			+ endTimeClusterName + " with " + documentGroup.size() + " documents");
+			cluster.put("name", startTimeClusterName + "-"
+			+ endTimeClusterName + ": " + documentGroup.size() + " documents");
 			cluster.put("children", clusterArray);
 			allClusterArray.add(cluster);
 			groupName++;
