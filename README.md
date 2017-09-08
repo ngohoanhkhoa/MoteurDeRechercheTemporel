@@ -1,4 +1,4 @@
-# MoteurDeRechercheTemporel
+# Moteur De Recherche Temporel
 
 ## Contributors:
 * [Divya GROVER] (https://github.com/ngohoanhkhoa)
